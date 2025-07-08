@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Cancel Interview{% endblock title %}
+
+{% block body %}
+<div class="container mt-5 text-center">
+  <h2 class="mb-4 text-danger">Cancel Interview</h2>
+  <p>Are you sure you want to cancel this interview?</p>
+
+  <form method="post" action="/cancel/{{ interview.sno }}" onsubmit="showLoading()">
+    <button type="submit" class="btn btn-danger">Yes, Cancel</button>
+    <a href="/interviews" class="btn btn-secondary ms-2">No, Go Back</a>
+  </form>
+</div>
+
+<!-- Loading overlay -->
+<div id="loading" style="
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  padding-top: 20%;
+  font-size: 1.5rem;
+  color: #333;
+  z-index: 9999;">
+  <div class="spinner-border text-danger" role="status"></div><br><br>
+  Canceling interview, please wait...
+</div>
+
+<script>
+  function showLoading() {
+    document.getElementById("loading").style.display = "block";
+  }
+</script>
+
+{% endblock body %}

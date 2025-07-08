@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Project Overview{% endblock title %}
+
+{% block body %}
+<div class="d-flex align-items-center justify-content-center vh-100">
+  <div class="card shadow-lg p-4" style="max-width: 800px; width: 100%;">
+    <h2 class="mb-4 text-primary text-center">📌 Project: Automated Interview Scheduler</h2>
+
+    <p><strong>Description:</strong> This project automates the process of scheduling interviews using Selenium and Google Calendar. It integrates with a Flask web interface where users can input candidate and interview details, and the tool will create calendar invites with proper timing, guests, and reminders.</p>
+
+    <p><strong>Key Features:</strong></p>
+    <ul>
+      <li>Automated login to Google Calendar</li>
+      <li>Dynamic date and time selection</li>
+      <li>Guest email handling and invite sending</li>
+      <li>Error handling with retry mechanisms</li>
+      <li>Clean UI built with Flask and Bootstrap</li>
+    </ul>
+
+    <p><strong>Technologies Used:</strong></p>
+    <div class="row">
+      <div class="col-md-4">
+        <ul>
+          <li>Python</li>
+          <li>Selenium</li>
+          <li>Flask</li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <ul>
+          <li>Bootstrap 5</li>
+          <li>HTML/CSS</li>
+          <li>JavaScript (optional)</li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <ul>
+          <li>Google Calendar</li>
+          <li>JSON config files</li>
+          <li>ChromeDriver</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="mt-3"><strong>Status:</strong> <span class="badge bg-success">In Progress</span></p>
+    <p class="mt-2"><strong>Author:</strong> Suhas J C, Aqheel</p>
+  </div>
+</div>
+{% endblock body %}

@@ -9,8 +9,6 @@ from selenium.common.exceptions import TimeoutException
 class GoogleLogin:
     email_input_field_xpath = "//input[@id='identifierId']"
     password_input_field_xpath = "//input[@type='password']"
-    # continue_as_xpath = "//div[contains(text(), 'Continue as')] | //button[contains(text(), 'Continue as')]"
-    login_verification_xpath = "//h1[text()='Welcome, Interview Scheduler']"
 
     def __init__(self, driver, url):
         self.driver = driver

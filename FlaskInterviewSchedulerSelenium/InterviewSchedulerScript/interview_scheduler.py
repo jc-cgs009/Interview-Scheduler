@@ -1,12 +1,9 @@
-import time
-
 from Utilities.get_driver import get_web_driver
-from Utilities.get_interview_data import get_interview_data
 from PageObjectModel.google_login import GoogleLogin
 from PageObjectModel.calendar_tasks import CalendarTask
 
 
-class InterviewScheduler:
+class InterviewSchedulerTool:
     def __init__(self):
         self.driver = get_web_driver()
         self.url = 'https://accounts.google.com/'
@@ -22,9 +19,7 @@ class InterviewScheduler:
         gl.enter_password(self.password)
 
 
-    def schedule_interview(self):
-        path = r"D:\Documents\InterviewScheduler\ScheduleInterviewSelenium\Utilities\interview_data.json"
-        data = get_interview_data(path)
+    def schedule_interview(self, data):
         self.login_to_google()
         sct = CalendarTask(self.driver, self.cal_url)
         sct.hit_calendar_url()
@@ -40,9 +35,7 @@ class InterviewScheduler:
         sct.click_on_save_button()
         sct.click_on_send_button()
 
-    def update_scheduled_interview(self):
-        path = r"D:\Documents\InterviewScheduler\ScheduleInterviewSelenium\Utilities\update_interview_data.json"
-        data = get_interview_data(path)
+    def update_scheduled_interview(self, data):
         self.login_to_google()
         uct = CalendarTask(self.driver, self.cal_url)
         uct.hit_calendar_url()
@@ -57,9 +50,7 @@ class InterviewScheduler:
         uct.click_on_save_button()
         uct.click_on_send_button()
 
-    def cancel_scheduled_interview(self):
-        path = r"D:\Documents\InterviewScheduler\ScheduleInterviewSelenium\Utilities\cancel_interview_data.json"
-        data = get_interview_data(path)
+    def cancel_scheduled_interview(self, data):
         self.login_to_google()
         cct = CalendarTask(self.driver, self.cal_url)
         cct.hit_calendar_url()
@@ -69,13 +60,13 @@ class InterviewScheduler:
         cct.click_on_send_button()
 
 
-
-insh = InterviewScheduler()
-# insh.schedule_interview()
-# insh.update_scheduled_interview()
-insh.cancel_scheduled_interview()
-# insh.login_to_google()
-time.sleep(2)
+if __name__ == "__main__":
+    insh = InterviewSchedulerTool()
+    # insh.schedule_interview()
+    # insh.update_scheduled_interview()
+    # insh.cancel_scheduled_interview()
+    # insh.login_to_google()
+    # time.sleep(2)
 
 
 
