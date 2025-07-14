@@ -1,3 +1,5 @@
+import time
+
 from selenium.common import NoSuchElementException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
@@ -42,6 +44,7 @@ class CalendarTask:
 
     def add_title(self, title):
         adt = self.driver.find_element(By.XPATH, CalendarTask.add_title_xpath)
+        time.sleep(1)
         adt.send_keys(Keys.CONTROL + "a")
         adt.send_keys(Keys.DELETE)
         adt.send_keys(title)

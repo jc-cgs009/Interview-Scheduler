@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback Form</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+        crossorigin="anonymous">
+</head>
+<body style="background-color: #f8f9fa;">
+
+  <div class="container mt-5">
+    <div class="card shadow-lg border-0">
+      <div class="card-body p-5">
+        <h2 class="mb-4 text-primary text-center">📝 Submit Feedback</h2>
+
+        <!-- Feedback Form -->
+        <form method="POST" action="/feedback_form/{{ candidate_info.cid }}">
+          <div class="mb-3">
+            <label for="cid" class="form-label">Candidate ID</label>
+            <input type="text" class="form-control" id="cid" name="cid"
+                   value="{{ candidate_info.cid }}" readonly>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Candidate Email</label>
+            <input type="email" class="form-control" id="email" name="email"
+                   value="{{ candidate_info.candidate_email }}" readonly>
+          </div>
+
+          <div class="mb-4">
+            <label for="feedback" class="form-label">Feedback</label>
+            <textarea class="form-control" id="feedback" name="feedback" rows="5"
+                      placeholder="Write your feedback here..." required>{{ candidate_info.feedback }}</textarea>
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-success btn-lg">✅ Submit Feedback</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+          crossorigin="anonymous"></script>
+</body>
+</html>

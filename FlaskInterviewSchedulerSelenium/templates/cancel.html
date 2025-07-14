@@ -7,7 +7,7 @@
   <h2 class="mb-4 text-danger">Cancel Interview</h2>
   <p>Are you sure you want to cancel this interview?</p>
 
-  <form method="post" action="/cancel/{{ interview.sno }}" onsubmit="showLoading()">
+  <form method="post" action="/cancel/{{ interview.cid }}" onsubmit="showLoading()">
     <button type="submit" class="btn btn-danger">Yes, Cancel</button>
     <a href="/interviews" class="btn btn-secondary ms-2">No, Go Back</a>
   </form>

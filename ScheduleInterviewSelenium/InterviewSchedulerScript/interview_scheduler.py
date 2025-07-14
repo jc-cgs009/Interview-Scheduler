@@ -72,7 +72,7 @@ class InterviewScheduler:
 
 insh = InterviewScheduler()
 # insh.schedule_interview()
-# insh.update_scheduled_interview()
+insh.update_scheduled_interview()
 # insh.cancel_scheduled_interview()
 # insh.login_to_google()
 time.sleep(2)

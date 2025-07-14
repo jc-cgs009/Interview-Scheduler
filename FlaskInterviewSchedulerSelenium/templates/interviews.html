@@ -4,16 +4,16 @@
 
 {% block body %}
 <!-- Flash messages -->
-  {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      {% for category, message in messages %}
-        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-          {{ message }}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-      {% endfor %}
-    {% endif %}
-  {% endwith %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 
 <div class="container my-4">
   <h2 class="mb-3 text-primary">📋 Scheduled Interviews</h2>
@@ -27,27 +27,38 @@
       <table class="table table-bordered table-hover align-middle text-center">
         <thead class="table-light">
           <tr>
-            <th scope="col">S.No</th>
-            <th scope="col" style="width: 20%;">Title</th>
-            <th scope="col" style="width: 25%;">Guests</th>
-            <th scope="col" class="text-nowrap">Date</th>
-            <th scope="col" class="text-nowrap">Start Time</th>
-            <th scope="col" class="text-nowrap">End Time</th>
-            <th scope="col" class="text-nowrap">Actions</th>
+            <th style="width: 5%;">S.No</th>
+            <th style="width: 8%;">CID</th>
+            <th style="width: 14%;">CName</th>
+            <th style="width: 14%;">IName</th>
+            <th style="width: 12%;">Title</th>
+            <th style="width: 15%;">Guests</th>
+            <th style="width: 8%;">Date</th>
+            <th style="width: 7%;">Start</th>
+            <th style="width: 7%;">End</th>
+            <th style="width: 10%;">Actions</th>
           </tr>
         </thead>
         <tbody>
           {% for interview in all_interviews %}
             <tr>
               <th scope="row">{{ loop.index }}</th>
-              <td style="word-break: break-word;">{{ interview.title }}</td>
-              <td style="word-break: break-word;">{{ interview.guests }}</td>
+              <td>{{ interview.cid }}</td>
+              <td class="text-nowrap">{{ interview.candidate_email }}</td>
+              <td class="text-nowrap">{{ interview.interviewer_email }}</td>
+              <td class="text-truncate" style="max-width: 120px;" title="{{ interview.title }}">
+                {{ interview.title }}
+              </td>
+              <td class="text-truncate" style="max-width: 150px;" title="{{ interview.guests }}">
+                {{ interview.guests }}
+              </td>
               <td class="text-nowrap">{{ interview.interview_date }}</td>
               <td class="text-nowrap">{{ interview.interview_start_time }}</td>
               <td class="text-nowrap">{{ interview.interview_end_time }}</td>
               <td class="text-nowrap">
-                <a href="/update/{{ interview.sno }}" class="btn btn-sm btn-outline-primary me-1">Update</a>
-                <a href="/cancel/{{ interview.sno }}" class="btn btn-sm btn-outline-danger">Delete</a>
+                <a href="/update/{{ interview.cid }}" class="btn btn-sm btn-outline-primary me-1">Update</a>
+                <a href="/cancel/{{ interview.cid }}" class="btn btn-sm btn-outline-danger">Delete</a>
+                <a href="/feedback/{{ interview.cid }}" class="btn btn-sm btn-outline-info">Feedback</a>
               </td>
             </tr>
           {% endfor %}
