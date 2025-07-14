@@ -6,7 +6,7 @@
 <div class="container my-5">
   <h2 class="mb-4 text-success text-center">📝 Feedback </h2>
 
-  {% if candidate_info.feedback != "" %}
+  {% if candidate_info and candidate_info.feedback != "" %}
     <div class="card shadow p-4">
       <p><strong>Candidate ID:</strong> {{ candidate_info.cid }}</p>
       <p><strong>Candidate Email:</strong> {{ candidate_info.candidate_email }}</p>
