@@ -207,6 +207,7 @@ def cancel(cid):
     if request.method == 'POST':
         try:
             interview = InterviewScheduler.query.filter_by(cid = cid).first()
+            c_info = Feedback.query.filter_by(cid = cid).first()
             data = {
                 "title": interview.title,
                 "interview_scheduled_date":interview.interview_date
@@ -220,6 +221,7 @@ def cancel(cid):
             flash(f"Failed to cancel interview: {str(e)}", "danger")
         else:
             db.session.delete(interview)
+            db.session.delete(c_info)
             db.session.commit()
 
             flash("Interview canceled successfully!", "success")
