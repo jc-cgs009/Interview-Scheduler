@@ -1,5 +1,4 @@
 import atexit
-import time
 import traceback
 from apscheduler.schedulers.background import BackgroundScheduler
 import requests
@@ -52,15 +51,15 @@ with app.app_context():
 
 def check_reminders_job():
     try:
-        print("⏰ Checking for upcoming interviews...")
+        print("Checking for upcoming interviews...")
         response = requests.get("http://127.0.0.1:5000/check-reminders")
         print(response.text)
     except Exception as e:
-        print("❌ Error while checking reminders:", e)
+        print("Error while checking reminders:", e)
 
 # Set up scheduler
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=check_reminders_job, trigger="interval", minutes=1)
+scheduler.add_job(func=check_reminders_job, trigger="interval", minutes=2)
 scheduler.start()
 
 # Shutdown scheduler when app stops
