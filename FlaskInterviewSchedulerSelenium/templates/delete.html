@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Interview{% endblock title %}
+
+{% block body %}
+<div class="container mt-5 text-center">
+  <h2 class="mb-4 text-danger">Delete Interview</h2>
+  <p>Are you sure you want to delete this interview?</p>
+
+  <form method="post" action="/delete/{{ interview.cid }}">
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a href="/interviews" class="btn btn-secondary ms-2">No, Go Back</a>
+  </form>
+</div>
+
+{% endblock body %}

@@ -37,6 +37,7 @@
             <th style="width: 7%;">Start</th>
             <th style="width: 7%;">End</th>
             <th style="width: 10%;">Actions</th>
+            <th style="width: 10%;">Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -56,9 +57,18 @@
               <td class="text-nowrap">{{ interview.interview_start_time }}</td>
               <td class="text-nowrap">{{ interview.interview_end_time }}</td>
               <td class="text-nowrap">
-                <a href="/update/{{ interview.cid }}" class="btn btn-sm btn-outline-primary me-1">Update</a>
-                <a href="/cancel/{{ interview.cid }}" class="btn btn-sm btn-outline-danger">Delete</a>
+                <a href="/update/{{ interview.cid }}" class="btn btn-sm btn-outline-primary me-1 {% if interview.disable_actions %}disabled{% endif %}">
+                  Update
+                </a>
+                <a href="/cancel/{{ interview.cid }}" class="btn btn-sm btn-outline-danger {% if interview.disable_actions %}disabled{% endif %}">
+                  Cancel
+                </a>
                 <a href="/feedback/{{ interview.cid }}" class="btn btn-sm btn-outline-info">Feedback</a>
+              </td>
+              <td class="text-nowrap">
+                <a href="/delete/{{ interview.cid }}" class="btn btn-sm btn-outline-danger {% if not interview.disable_actions %}disabled{% endif %}" title="Delete">
+                  <i class="bi bi-trash"></i>
+                </a>
               </td>
             </tr>
           {% endfor %}

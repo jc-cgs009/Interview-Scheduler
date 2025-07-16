@@ -134,7 +134,13 @@ def schedule():
 
 @app.route("/interviews", methods = ['GET', 'POST'])
 def interviews():
+    from Utilities.disable_action import should_disable_actions
+
     all_interviews = InterviewScheduler.query.all()
+
+    for interview in all_interviews:
+        interview.disable_actions = should_disable_actions(interview.interview_date, interview.interview_start_time)
+
     return render_template("interviews.html", all_interviews = all_interviews)
 
 
@@ -207,7 +213,6 @@ def cancel(cid):
     if request.method == 'POST':
         try:
             interview = InterviewScheduler.query.filter_by(cid = cid).first()
-            c_info = Feedback.query.filter_by(cid = cid).first()
             data = {
                 "title": interview.title,
                 "interview_scheduled_date":interview.interview_date
@@ -221,7 +226,6 @@ def cancel(cid):
             flash(f"Failed to cancel interview: {str(e)}", "danger")
         else:
             db.session.delete(interview)
-            db.session.delete(c_info)
             db.session.commit()
 
             flash("Interview canceled successfully!", "success")
@@ -230,6 +234,21 @@ def cancel(cid):
 
     interview = InterviewScheduler.query.filter_by(cid = cid).first()
     return render_template("cancel.html", interview = interview)
+
+@app.route("/delete/<int:cid>", methods = ["GET", "POST"])
+def delete(cid):
+    if request.method == 'POST':
+        interview = InterviewScheduler.query.filter_by(cid = cid).first()
+        c_info = Feedback.query.filter_by(cid = cid).first()
+
+        db.session.delete(interview)
+        db.session.delete(c_info)
+        db.session.commit()
+
+        return redirect(url_for("interviews"))
+
+    interview = InterviewScheduler.query.filter_by(cid=cid).first()
+    return render_template("delete.html", interview = interview)
 
 @app.route("/check-reminders", methods = ['GET', 'POST'])
 def check_reminders():
@@ -261,7 +280,7 @@ def check_reminders():
             traceback.print_exc()
             print("Error while checking reminders:", e)
 
-    return "Sent reminders"
+    return "checked for reminders"
 
 @app.route("/feedback_form/<int:cid>", methods = ['GET', 'POST'])
 def feedback_form(cid):
